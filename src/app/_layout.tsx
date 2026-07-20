@@ -1,18 +1,43 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
+import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
-
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
 
 SplashScreen.preventAutoHideAsync();
+SplashScreen.hideAsync();
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+export default function RootLayout() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
+    <Stack
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#fff',
+        },
+        headerTintColor: '#111827',
+        headerTitleStyle: {
+          fontWeight: '600',
+          fontSize: 16,
+        },
+        headerShadowVisible: false,
+      }}
+    >
+      <Stack.Screen
+        name="index"
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="map"
+        options={{
+          title: 'Delivery Map',
+          presentation: 'modal',
+        }}
+      />
+      <Stack.Screen
+        name="delivery/[id]"
+        options={{
+          title: 'Delivery Details',
+        }}
+      />
+    </Stack>
   );
 }
