@@ -1,10 +1,14 @@
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
 
-// Configure notification behavior
+// Configure notification behavior.
+// shouldShowBanner/List make the notification appear even while the app is
+// open in the foreground (older SDKs used shouldShowAlert).
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
+    shouldShowBanner: true,
+    shouldShowList: true,
     shouldPlaySound: true,
     shouldSetBadge: true,
   }),

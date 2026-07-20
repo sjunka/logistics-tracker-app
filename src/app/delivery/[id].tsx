@@ -11,6 +11,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import MapView, { Marker } from 'react-native-maps';
 import { Delivery } from '@/types/delivery';
 import { fetchDeliveries } from '@/services/deliveryService';
+import { sendDeliveryNotification } from '@/services/notificationService';
 
 export default function DeliveryDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -195,6 +196,19 @@ export default function DeliveryDetailScreen() {
         >
           <Text style={styles.actionButtonText}>🗺️ View on Map</Text>
         </TouchableOpacity>
+        {/* Fires a local notification — same shape a backend push would take */}
+        <TouchableOpacity
+          style={[styles.actionButton, styles.notifyButton]}
+          onPress={() =>
+            sendDeliveryNotification(
+              `${delivery.orderId} update`,
+              `${delivery.customerName}'s order is out for delivery`,
+              2
+            )
+          }
+        >
+          <Text style={styles.actionButtonText}>🔔 Notify Driver</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           style={[styles.actionButton, styles.secondaryButton]}
           onPress={() => router.back()}
@@ -306,6 +320,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
     color: '#fff',
+  },
+  notifyButton: {
+    backgroundColor: '#10b981',
   },
   secondaryButton: {
     backgroundColor: '#f3f4f6',
