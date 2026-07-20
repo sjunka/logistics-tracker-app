@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Logistics Tracker — last-mile delivery app</title>
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --blue: #3b82f6;
+      --orange: #f59e0b;
+      --green: #10b981;
+      --red: #ef4444;
+      --shadow: 0 1px 3px rgba(0,0,0,.08), 0 8px 24px rgba(0,0,0,.06);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b0f17;
+        --card: #131a24;
+        --text: #f3f4f6;
+        --muted: #9aa4b2;
+        --line: #232c3a;
+        --shadow: 0 1px 3px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+    /* Hero */
+    header.hero {
+      padding: 72px 0 40px;
+      text-align: center;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--blue);
+      background: color-mix(in srgb, var(--blue) 12%, transparent);
+      padding: 6px 12px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: 1.1;
+      margin: 0 0 16px;
+      letter-spacing: -0.02em;
+    }
+    .lede {
+      font-size: clamp(17px, 2.5vw, 20px);
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto 28px;
+    }
+    .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 15px;
+    }
+    .btn.primary { background: var(--blue); color: #fff; }
+    .btn.primary:hover { text-decoration: none; filter: brightness(1.05); }
+    .btn.ghost { background: var(--card); color: var(--text); border: 1px solid var(--line); }
+    .btn.ghost:hover { text-decoration: none; border-color: var(--blue); }
+
+    /* Stack line */
+    .stack {
+      margin: 28px auto 0;
+      display: flex; gap: 8px 10px; flex-wrap: wrap; justify-content: center;
+      max-width: 720px;
+    }
+    .chip {
+      font-size: 13px; color: var(--muted);
+      border: 1px solid var(--line); border-radius: 8px;
+      padding: 5px 10px; background: var(--card);
+    }
+
+    /* Sections */
+    section { padding: 44px 0; }
+    section h2 {
+      font-size: clamp(24px, 3.5vw, 32px);
+      margin: 0 0 8px; letter-spacing: -0.01em;
+    }
+    section .sub { color: var(--muted); margin: 0 0 28px; }
+
+    /* Demo */
+    .demo { display: grid; grid-template-columns: 300px 1fr; gap: 32px; align-items: center; }
+    .demo img.phone {
+      width: 300px; border-radius: 22px; box-shadow: var(--shadow);
+      display: block;
+    }
+    .demo .points { margin: 0; padding: 0; list-style: none; }
+    .demo .points li { padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .demo .points li:last-child { border-bottom: 0; }
+    .demo .points b { display: block; }
+    .demo .points span { color: var(--muted); font-size: 15px; }
+
+    /* Feature grid */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .feature {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 14px; padding: 20px; box-shadow: var(--shadow);
+    }
+    .feature .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 8px; vertical-align: middle; }
+    .feature h3 { margin: 0 0 6px; font-size: 17px; }
+    .feature p { margin: 0; color: var(--muted); font-size: 15px; }
+
+    /* Screens */
+    .screens { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .screens figure { margin: 0; text-align: center; }
+    .screens img {
+      width: 100%; border-radius: 16px; border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .screens figcaption { color: var(--muted); font-size: 14px; margin-top: 10px; }
+
+    /* Flow */
+    .flow { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; box-shadow: var(--shadow); }
+    .flow pre {
+      margin: 0; overflow-x: auto; font-size: 13px; line-height: 1.5;
+      font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; color: var(--text);
+    }
+
+    /* Code */
+    .code {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 14px; padding: 18px 20px; box-shadow: var(--shadow); overflow-x: auto;
+    }
+    .code pre { margin: 0; font-size: 13.5px; line-height: 1.6; font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; }
+    .tok-key { color: var(--blue); }
+    .tok-str { color: var(--green); }
+    .tok-com { color: var(--muted); font-style: italic; }
+
+    footer { padding: 40px 0 60px; text-align: center; color: var(--muted); font-size: 14px; }
+    footer a { font-weight: 600; }
+
+    @media (max-width: 760px) {
+      .demo { grid-template-columns: 1fr; justify-items: center; }
+      .screens { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <span class="badge">Last-mile delivery · React Native</span>
+      <h1>Logistics Tracker</h1>
+      <p class="lede">
+        A driver app for last-mile delivery. Live GPS tracking, maps and routing,
+        a proof-of-delivery timeline, and full offline support — built with Expo and TypeScript.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="#demo">Watch the demo</a>
+        <a class="btn ghost" href="https://github.com/sjunka/logistics-tracker-app" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+      <div class="stack">
+        <span class="chip">Expo 57</span>
+        <span class="chip">React Native 0.86</span>
+        <span class="chip">TypeScript strict</span>
+        <span class="chip">Expo Router</span>
+        <span class="chip">Native Maps</span>
+        <span class="chip">AsyncStorage</span>
+        <span class="chip">Push notifications</span>
+      </div>
+    </div>
+  </header>
+
+  <section id="demo">
+    <div class="wrap demo">
+      <img class="phone" src="assets/demo.gif" alt="Walkthrough: delivery list, order details, then the live map where driver markers move every 2 seconds" />
+      <div>
+        <h2>The whole flow in 13 seconds</h2>
+        <p class="sub">Delivery list → order details → live map. Driver markers move every 2 seconds toward their drop-off points.</p>
+        <ul class="points">
+          <li><b>Dispatch view</b><span>Every active delivery, status at a glance, pull to refresh.</span></li>
+          <li><b>Order detail</b><span>Customer, address, GPS coordinates, and a delivery timeline.</span></li>
+          <li><b>Live map</b><span>Driver positions update in real time over the street map.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>What it does</h2>
+      <p class="sub">The core of a delivery driver app, end to end.</p>
+      <div class="grid">
+        <div class="feature">
+          <h3><span class="dot" style="background:var(--red)"></span>Real-time tracking</h3>
+          <p>Driver markers update every 2 seconds and move smoothly toward each destination.</p>
+        </div>
+        <div class="feature">
+          <h3><span class="dot" style="background:var(--blue)"></span>Maps and routing</h3>
+          <p>Native maps — Apple on iOS, Google on Android — with color-coded delivery pins. No API key needed.</p>
+        </div>
+        <div class="feature">
+          <h3><span class="dot" style="background:var(--green)"></span>Offline first</h3>
+          <p>Deliveries cache on the device with AsyncStorage. The app works with no signal.</p>
+        </div>
+        <div class="feature">
+          <h3><span class="dot" style="background:var(--orange)"></span>Push notifications</h3>
+          <p>Permission flow and device token wired up, ready for a backend to send status updates.</p>
+        </div>
+        <div class="feature">
+          <h3><span class="dot" style="background:var(--blue)"></span>Delivery timeline</h3>
+          <p>Order placed → out for delivery → delivered, the proof-of-delivery pattern drivers rely on.</p>
+        </div>
+        <div class="feature">
+          <h3><span class="dot" style="background:var(--green)"></span>Type-safe</h3>
+          <p>TypeScript strict mode across screens, services, and models. Zero compile errors.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Three screens</h2>
+      <p class="sub">Running on the iOS Simulator.</p>
+      <div class="screens">
+        <figure>
+          <img src="assets/home.png" alt="Delivery list with four orders and color-coded status badges" />
+          <figcaption>Delivery list</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/details.png" alt="Order details with map preview, GPS coordinates, and status timeline" />
+          <figcaption>Order details</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/map.png" alt="Live map over New York with colored driver and destination markers" />
+          <figcaption>Live map</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>How it is built</h2>
+      <p class="sub">Screens render state. Services own the data. Types are defined once.</p>
+      <div class="flow">
+<pre>src/
+├── app/                    Expo Router screens
+│   ├── index.tsx           Home — delivery list
+│   ├── map.tsx             Map — live GPS markers
+│   └── delivery/[id].tsx   Details — order + timeline
+├── services/
+│   ├── deliveryService.ts       REST call + offline cache
+│   └── notificationService.ts   Push permission + token
+└── types/delivery.ts       Shared TypeScript models</pre>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Offline-first data</h2>
+      <p class="sub">Check the cache first, then the network. Drivers lose signal — the app should not.</p>
+      <div class="code">
+<pre><span class="tok-key">export async function</span> fetchDeliveries()<span class="tok-key">:</span> Promise&lt;Delivery[]&gt; {
+  <span class="tok-com">// Cache first — instant load, works with no signal</span>
+  <span class="tok-key">const</span> cached = <span class="tok-key">await</span> AsyncStorage.getItem(<span class="tok-str">'deliveries'</span>);
+  <span class="tok-key">if</span> (cached) <span class="tok-key">return</span> JSON.parse(cached);
+
+  <span class="tok-com">// Then the API, and cache the result for next time</span>
+  <span class="tok-key">const</span> data = <span class="tok-key">await</span> api.get(<span class="tok-str">'/deliveries'</span>);
+  <span class="tok-key">await</span> AsyncStorage.setItem(<span class="tok-str">'deliveries'</span>, JSON.stringify(data));
+  <span class="tok-key">return</span> data;
+}</pre>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Run it</h2>
+      <p class="sub">Three prerequisites, one command.</p>
+      <div class="code">
+<pre>git clone https://github.com/sjunka/logistics-tracker-app.git
+cd logistics-tracker-app
+npm install
+
+npm run ios      <span class="tok-com"># iOS simulator</span>
+npm run android  <span class="tok-com"># Android emulator</span>
+npm start        <span class="tok-com"># Expo Go — scan the QR code</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      Built by <a href="https://github.com/sjunka" target="_blank" rel="noopener">Sergio Junca</a>
+      · <a href="https://github.com/sjunka/logistics-tracker-app" target="_blank" rel="noopener">Source on GitHub</a>
+    </div>
+  </footer>
+</body>
+</html>
