@@ -53,6 +53,19 @@ npm run android  # Android
 npm start        # Expo Go (scan QR code)
 ```
 
+## Landing Page
+
+A one-page site that explains the project lives on the **`feat/landing-page`** branch. It ships with a small zero-dependency web server.
+
+[![Landing page — Logistics Tracker hero with demo and features](docs/media/landing-hero.png)](docs/media/landing-full.png)
+
+```bash
+git checkout feat/landing-page
+npm run landing        # serves the page at http://localhost:4000
+```
+
+The page is a single self-contained HTML file — no build step, no external libraries.
+
 ---
 
 ## How It Works
