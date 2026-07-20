@@ -25,7 +25,7 @@ Track drivers live, manage deliveries, work offline.
 
 <p align="center"><em>List → order details → live map. Driver markers update every 2 seconds, moving toward their delivery points.</em></p>
 
-> Prefer video? [Watch the MP4 (183 KB)](docs/media/demo.mp4)
+> Prefer video? [Watch the MP4 (161 KB)](docs/media/demo.mp4)
 
 ### Screenshots
 
