@@ -24,16 +24,18 @@ export async function initializeNotifications(): Promise<string | null> {
       }
     }
 
-    // Get device token for backend to send push notifications
-    // In production: send this token to your backend for push notification delivery
-    const token = await Notifications.getExpoPushTokenAsync({
-      projectId: 'cigotracker-demo',
-    });
-
-    console.log('Push token:', token.data);
-    return token.data;
+    // In production, fetch the device push token and send it to your backend:
+    //
+    //   const token = await Notifications.getExpoPushTokenAsync({
+    //     projectId: '<your-eas-project-id>',
+    //   });
+    //   return token.data;
+    //
+    // This needs a real EAS project id, so it is skipped in the Expo Go demo.
+    // The permission flow above is the part that matters for the walkthrough.
+    return 'demo-permissions-granted';
   } catch (error) {
-    console.error('Notification init error:', error);
+    console.log('Notification init skipped:', error);
     return null;
   }
 }

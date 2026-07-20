@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text, ActivityIndicator } from 'react-native';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import { useRouter } from 'expo-router';
 import { Delivery } from '@/types/delivery';
 import { fetchDeliveries, simulateLocationUpdate } from '@/services/deliveryService';
@@ -74,11 +74,12 @@ export default function MapScreen() {
   return (
     <View style={styles.container}>
       {/* Map showing delivery locations in real-time */}
+      {/* Default provider = Apple Maps on iOS, Google on Android.
+          Both render without an API key, so the map works out of the box. */}
       <MapView
         ref={mapRef}
         style={styles.map}
         initialRegion={INITIAL_REGION}
-        provider={PROVIDER_GOOGLE}
         showsUserLocation
         showsMyLocationButton={false}
       >

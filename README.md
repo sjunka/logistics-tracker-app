@@ -1,6 +1,6 @@
 # Logistics Tracker App
 
-Production-ready delivery tracking for last-mile logistics. **Expo 57 · React Native 0.86 · TypeScript · Google Maps · Real-time GPS**.
+Production-ready delivery tracking for last-mile logistics. **Expo 57 · React Native 0.86 · TypeScript · Native Maps · Real-time GPS**.
 
 Track drivers live, manage deliveries, work offline.
 
@@ -19,42 +19,27 @@ Track drivers live, manage deliveries, work offline.
 
 ## Demo
 
-**Real-time tracking:** Watch driver markers move every 2 seconds on the map, smoothly interpolating toward blue delivery destinations. Running live on iOS Simulator.
+<p align="center">
+  <img src="docs/media/demo.gif" width="300" alt="Walkthrough: delivery list, then order details with map and timeline, then the live map where driver markers move every 2 seconds" />
+</p>
+
+<p align="center"><em>List → order details → live map. Driver markers update every 2 seconds, moving toward their delivery points.</em></p>
+
+> Prefer video? [Watch the MP4 (183 KB)](docs/media/demo.mp4)
 
 ### Screenshots
 
-**Screen 1 — Home**  
-Delivery list with 4 orders, color-coded status badges, pull-to-refresh.
+| Home — delivery list | Details — order + timeline | Map — live tracking |
+|:---:|:---:|:---:|
+| ![Delivery list with 4 orders, color-coded status badges, pull-to-refresh](docs/media/home.png) | ![Order details: map preview, customer, GPS coordinates, status timeline with green checks](docs/media/details.png) | ![Live map over NYC with colored markers — blue driver, orange pending, green delivered](docs/media/map.png) |
 
-![Home screen showing delivery list](docs/screen-1-home.png)
+### Walkthrough
 
-**Screen 2 — Details**  
-Order details with customer name, GPS coordinates, status timeline, mini map.
-
-![Details screen with order information](docs/screen-2-details.png)
-
-**Screen 3 — Map (Live Update 1)**  
-Google Map with real-time GPS markers. Red = driver current location, blue = delivery destination. Updates every 2 seconds.
-
-![Map screen showing live tracking - first update](docs/screen-3-map-live-1.png)
-
-**Screen 4 — Map (Live Update 2)**  
-Same map, 2 seconds later. Red markers have moved smoothly toward blue destinations.
-
-![Map screen showing live tracking - second update](docs/screen-4-map-live-2.png)
-
-**Screen 5 — Map (Live Update 3)**  
-Same map, 4 seconds later. Continuous smooth movement visible.
-
-![Map screen showing live tracking - third update](docs/screen-5-map-live-3.png)
-
-### Live Walkthrough
-
-1. **Home screen** → 4 deliveries load instantly (from cache)
-2. **Tap order** → Details screen shows GPS coords (40.7128, -74.0060) and timeline
-3. **Tap "View on Map"** → Map loads with markers
-4. **Watch 10 seconds** → Red markers move smoothly every 2 seconds
-5. **Color-coded status** → blue (in transit), orange (pending), green (done)
+1. **Home** → 4 deliveries load instantly from cache
+2. **Tap order** → details show GPS coordinates (40.7100, -74.0100) and a status timeline
+3. **View on Map** → live map with markers over Manhattan
+4. **Watch** → driver markers move every 2 seconds toward their destinations
+5. **Status colors** → blue (in transit), orange (pending), green (delivered)
 
 ## Quick Start
 
@@ -282,7 +267,7 @@ interface Delivery {
 
 ✓ **Real-time tracking** — GPS markers move every 2 seconds smoothly  
 ✓ **Offline resilience** — AsyncStorage demonstrates field team reliability  
-✓ **Maps integration** — Google Maps critical for delivery operations  
+✓ **Maps integration** — native maps (Apple on iOS, Google on Android), no API key needed  
 ✓ **Type safety** — TypeScript strict mode prevents delivery data bugs  
 ✓ **Mobile UX** — SafeAreaView, responsive layout, proper touch targets  
 ✓ **Production patterns** — permission handling, error boundaries, scalable architecture  
@@ -341,7 +326,7 @@ Replace mock with real:
 - **React Native 0.86** — iOS + Android from one codebase
 - **TypeScript 6** — strict type safety
 - **Expo Router** — file-based routing
-- **React Native Maps** — Google Maps integration
+- **React Native Maps** — native maps (Apple Maps on iOS, Google Maps on Android)
 - **AsyncStorage** — offline data persistence
 - **Expo Notifications** — push notification setup
 - **Expo Location** — GPS (pattern shown, not active)

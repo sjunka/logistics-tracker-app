@@ -152,38 +152,34 @@ export default function DeliveryDetailScreen() {
           <Text style={styles.label}>Timeline</Text>
           <View style={styles.timeline}>
             <View style={styles.timelineItem}>
-              <View style={styles.timelineCheckmark}>✓</View>
+              <View style={[styles.timelineDot, styles.dotActive]}>
+                <Text style={styles.dotIcon}>✓</Text>
+              </View>
               <Text style={styles.timelineText}>Order Placed</Text>
             </View>
-            <View
-              style={[
-                styles.timelineItem,
-                delivery.status !== 'pending' && styles.timelineItemActive,
-              ]}
-            >
+            <View style={styles.timelineItem}>
               <View
                 style={[
-                  styles.timelineCheckmark,
-                  delivery.status !== 'pending' && styles.checkmarkActive,
+                  styles.timelineDot,
+                  delivery.status !== 'pending' && styles.dotActive,
                 ]}
               >
-                {delivery.status !== 'pending' ? '✓' : '•'}
+                <Text style={styles.dotIcon}>
+                  {delivery.status !== 'pending' ? '✓' : '•'}
+                </Text>
               </View>
               <Text style={styles.timelineText}>Out for Delivery</Text>
             </View>
-            <View
-              style={[
-                styles.timelineItem,
-                delivery.status === 'delivered' && styles.timelineItemActive,
-              ]}
-            >
+            <View style={styles.timelineItem}>
               <View
                 style={[
-                  styles.timelineCheckmark,
-                  delivery.status === 'delivered' && styles.checkmarkActive,
+                  styles.timelineDot,
+                  delivery.status === 'delivered' && styles.dotActive,
                 ]}
               >
-                {delivery.status === 'delivered' ? '✓' : '•'}
+                <Text style={styles.dotIcon}>
+                  {delivery.status === 'delivered' ? '✓' : '•'}
+                </Text>
               </View>
               <Text style={styles.timelineText}>Delivered</Text>
             </View>
@@ -271,13 +267,10 @@ const styles = StyleSheet.create({
   },
   timelineItem: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     marginBottom: 12,
   },
-  timelineItemActive: {
-    opacity: 1,
-  },
-  timelineCheckmark: {
+  timelineDot: {
     width: 24,
     height: 24,
     borderRadius: 12,
@@ -285,11 +278,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
+  },
+  dotActive: {
+    backgroundColor: '#10b981',
+  },
+  dotIcon: {
     color: '#fff',
     fontWeight: 'bold',
-  },
-  checkmarkActive: {
-    backgroundColor: '#10b981',
+    fontSize: 13,
   },
   timelineText: {
     fontSize: 14,
