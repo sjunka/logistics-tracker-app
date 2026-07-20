@@ -19,13 +19,42 @@ Track drivers live, manage deliveries, work offline.
 
 ## Demo
 
-**Real-time tracking:** Watch driver markers move every 2 seconds on the map, smoothly interpolating toward blue delivery destinations.
+**Real-time tracking:** Watch driver markers move every 2 seconds on the map, smoothly interpolating toward blue delivery destinations. Running live on iOS Simulator.
 
-| Home Screen | Details Screen | Live Map |
-|:---:|:---:|:---:|
-| ![Delivery list with 4 orders, color badges, pull-to-refresh](docs/home.png) | ![Order details with GPS coords, timeline, mini map](docs/details.png) | ![Interactive map, red drivers moving live, legend](docs/map.png) |
+### Screenshots
 
-**Live demo:** Running on iOS Simulator. Tap home → tap delivery → watch map update every 2 seconds.
+**Screen 1 — Home**  
+Delivery list with 4 orders, color-coded status badges, pull-to-refresh.
+
+![Home screen showing delivery list](docs/screen-1-home.png)
+
+**Screen 2 — Details**  
+Order details with customer name, GPS coordinates, status timeline, mini map.
+
+![Details screen with order information](docs/screen-2-details.png)
+
+**Screen 3 — Map (Live Update 1)**  
+Google Map with real-time GPS markers. Red = driver current location, blue = delivery destination. Updates every 2 seconds.
+
+![Map screen showing live tracking - first update](docs/screen-3-map-live-1.png)
+
+**Screen 4 — Map (Live Update 2)**  
+Same map, 2 seconds later. Red markers have moved smoothly toward blue destinations.
+
+![Map screen showing live tracking - second update](docs/screen-4-map-live-2.png)
+
+**Screen 5 — Map (Live Update 3)**  
+Same map, 4 seconds later. Continuous smooth movement visible.
+
+![Map screen showing live tracking - third update](docs/screen-5-map-live-3.png)
+
+### Live Walkthrough
+
+1. **Home screen** → 4 deliveries load instantly (from cache)
+2. **Tap order** → Details screen shows GPS coords (40.7128, -74.0060) and timeline
+3. **Tap "View on Map"** → Map loads with markers
+4. **Watch 10 seconds** → Red markers move smoothly every 2 seconds
+5. **Color-coded status** → blue (in transit), orange (pending), green (done)
 
 ## Quick Start
 
